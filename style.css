@@ -1,0 +1,117 @@
+/* ============================================================
+   Bonafide Student Certificate Generator - Stylesheet
+   ============================================================ */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8fafc;
+    color: #0f172a;
+}
+
+/* Subtle highlighting for user-editable form fields */
+.editable-field-input {
+    background-color: #f0f9ff;
+    border: 1.5px solid #a5f3fc;
+    transition: all 0.2s ease-in-out;
+}
+.editable-field-input:focus {
+    background-color: #ffffff;
+    border-color: #0284c7;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    outline: none;
+}
+
+/* A4 Portrait exact dimensions - matches the reference certificate layout.
+   Top / Right / Left margins are kept the same as the reference PDF.
+   Bottom padding has been reduced (28mm -> 14mm) and the footer row is
+   pinned to the bottom with "margin-top:auto" so the seal/signature line
+   sits close to the page edge instead of leaving a large empty gap below it. */
+.a4-container {
+    width: 210mm;
+    min-height: 297mm;
+    height: 297mm;
+    background: #ffffff;
+    margin: 0 auto;
+    position: relative;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 24mm 22mm 14mm 22mm; /* top right bottom left */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Certificate formal serif typography */
+.cert-font-heading {
+    font-family: 'Cinzel', 'Times New Roman', Georgia, serif;
+}
+.cert-font-body {
+    font-family: 'Merriweather', 'Lora', 'Times New Roman', Georgia, serif;
+}
+
+/* Passport Size Photo Box */
+.photo-box {
+    width: 3.5cm;
+    height: 4.5cm;
+    border: 1px dashed #64748b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #fafafa;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Dynamic variable text styling inside preview */
+.cert-variable-value {
+    font-weight: 700;
+    color: #000000;
+    text-transform: uppercase;
+    display: inline;
+    padding: 0 2px;
+}
+
+/* Responsive scaling wrapper for mobile viewport */
+.preview-viewport-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1rem 0;
+    background-color: #e2e8f0;
+    border-radius: 0.75rem;
+}
+
+/* Print styles */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #certificate-preview, #certificate-preview * {
+        visibility: visible;
+    }
+    #certificate-preview {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        height: 297mm;
+        box-shadow: none;
+        transform: none !important;
+    }
+    .no-print {
+        display: none !important;
+    }
+}
+
+/* Small-screen refinements for mobile friendliness */
+@media (max-width: 480px) {
+    #toastNotification {
+        left: 1rem;
+        right: 1rem;
+        max-width: none;
+    }
+}
